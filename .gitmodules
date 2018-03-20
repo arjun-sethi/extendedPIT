@@ -1,3 +1,0 @@
-[submodule "pitest"]
-	path = pitest
-	url = https://github.com/hcoles/pitest
