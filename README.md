@@ -31,6 +31,12 @@ First copy and paste below code into pom.xml file of the project in the correct 
             <mutator>AOR7</mutator>
             <mutator>AOR8</mutator>
             <mutator>AOR9</mutator>
+            <mutator>ROR1</mutator>
+            <mutator>ROR2</mutator>
+            <mutator>ROR3</mutator>
+            <mutator>ROR4</mutator>
+            <mutator>ROR5</mutator>
+            <mutator>ROR6</mutator>
           </mutators>
         </configuration>
       </plugin>

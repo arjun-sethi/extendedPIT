@@ -56,6 +56,7 @@ import org.pitest.mutationtest.engine.gregor.mutators.experimental.SwitchMutator
 
 //extentsion mutators
 import org.pitest.mutationtest.engine.gregor.mutators.AORMutator;
+import org.pitest.mutationtest.engine.gregor.mutators.RORMutator;
 
 public final class Mutator {
 
@@ -86,7 +87,7 @@ public final class Mutator {
     add("MATH", MathMutator.MATH_MUTATOR);
 
     /**
-     * Default mutators that mutate AOR of +,-,/,*.
+     * Mutators that mutate AOR of +,-,/,*.
      *
      */
     add("AOR1", AORMutator.AORMutator1.AOR_MUTATOR); //sub, add , div, mul
@@ -108,8 +109,17 @@ public final class Mutator {
     /**
      * Default mutator that negates conditionals.
      */
-    add("NEGATE_CONDITIONALS",
-        NegateConditionalsMutator.NEGATE_CONDITIONALS_MUTATOR);
+    add("NEGATE_CONDITIONALS",NegateConditionalsMutator.NEGATE_CONDITIONALS_MUTATOR);
+
+    /**
+     * MutatorS for ROR for < , <= , > , >= , != , ==
+     */
+    add("ROR1",RORMutator.RORMutator1.ROR_MUTATOR); // != ==  >=  > < <=
+    add("ROR2",RORMutator.RORMutator2.ROR_MUTATOR); // != ==  <=  < > >=
+    add("ROR3",RORMutator.RORMutator3.ROR_MUTATOR); // <= < >=  > ==  !=
+    add("ROR4",RORMutator.RORMutator4.ROR_MUTATOR); // >= > !=  ==  <=  <
+    add("ROR5",RORMutator.RORMutator5.ROR_MUTATOR); // >  >=  ==  !=  < <=
+    add("ROR6",RORMutator.RORMutator6.ROR_MUTATOR); // <  <=  > >=  !=  ==
 
     /**
      * Default mutator that replaces the relational operators with their
