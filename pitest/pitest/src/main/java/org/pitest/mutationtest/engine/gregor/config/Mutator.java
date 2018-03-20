@@ -54,6 +54,9 @@ import org.pitest.mutationtest.engine.gregor.mutators.experimental.RemoveIncreme
 import org.pitest.mutationtest.engine.gregor.mutators.experimental.RemoveSwitchMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.experimental.SwitchMutator;
 
+//extentsion mutators
+import org.pitest.mutationtest.engine.gregor.mutators.AORMutator;
+
 public final class Mutator {
 
   private static final Map<String, Iterable<MethodMutatorFactory>> MUTATORS = new LinkedHashMap<>();
@@ -81,6 +84,20 @@ public final class Mutator {
      * Default mutator that mutates binary arithmetic operations.
      */
     add("MATH", MathMutator.MATH_MUTATOR);
+
+    /**
+     * Default mutators that mutate AOR of +,-,/,*.
+     *
+     */
+    add("AOR1", AORMutator.AORMutator1.AOR_MUTATOR); //sub, add , div, mul
+    add("AOR2", AORMutator.AORMutator2.AOR_MUTATOR); //mul, div, add, sub
+    add("AOR3", AORMutator.AORMutator3.AOR_MUTATOR); //div, mul, sub, add
+    add("AOR4", AORMutator.AORMutator4.AOR_MUTATOR); //sub, mul, div, add
+    add("AOR5", AORMutator.AORMutator5.AOR_MUTATOR); //sub, div, add, mul
+    add("AOR6", AORMutator.AORMutator6.AOR_MUTATOR); //mul, add, div, sub
+    add("AOR7", AORMutator.AORMutator7.AOR_MUTATOR); //mul, div, sub, add
+    add("AOR8", AORMutator.AORMutator8.AOR_MUTATOR); //div, add, sub, mul
+    add("AOR9", AORMutator.AORMutator9.AOR_MUTATOR); //div, mul, add, sub
 
     /**
      * Default mutator that removes method calls to void methods.

@@ -5,6 +5,12 @@ Extending the great PIT Mutation Testing Tool, from pittest.org. This project in
 
 Install maven onto your computer, as well as JAVA SDK
 
+Navigate to extendedPIT/pitest/pitest
+
+```
+$ mvn clean install -DskipTests
+```
+
 ### To run a test
 First copy and paste below code into pom.xml file of the project in the correct location.
 
@@ -13,7 +19,7 @@ First copy and paste below code into pom.xml file of the project in the correct 
       <plugin>
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
-        <version>1.3.2</version>
+        <version>1.4.0-SNAPSHOT</version>
         <configuration>
           <mutators>
             <mutator>AOR1</mutator>
@@ -32,6 +38,7 @@ First copy and paste below code into pom.xml file of the project in the correct 
     </build>
 
 Additionally the following lines can be added in the configuration section to run only certain test cases.
+
           <targetClasses>
             <param>org.jfree.chart.annotations*</param>
           </targetClasses>
