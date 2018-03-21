@@ -12,7 +12,7 @@ $ mvn clean install -DskipTests
 ```
 
 ### To run a test
-First copy and paste below code into pom.xml file of the project in the correct location.
+First copy and paste below code into pom.xml file of the project in the correct location to include AOD, AOR , ROR
 
     <build>
      <plugins>
@@ -22,21 +22,17 @@ First copy and paste below code into pom.xml file of the project in the correct 
         <version>1.4.0-SNAPSHOT</version>
         <configuration>
           <mutators>
+            <mutator>MATH</mutator>
             <mutator>AOR1</mutator>
             <mutator>AOR2</mutator>
             <mutator>AOR3</mutator>
-            <mutator>AOR4</mutator>
-            <mutator>AOR5</mutator>
-            <mutator>AOR6</mutator>
-            <mutator>AOR7</mutator>
-            <mutator>AOR8</mutator>
-            <mutator>AOR9</mutator>
+            <mutator>NEGATE_CONDITIONALS</mutator>
             <mutator>ROR1</mutator>
             <mutator>ROR2</mutator>
             <mutator>ROR3</mutator>
             <mutator>ROR4</mutator>
-            <mutator>ROR5</mutator>
-            <mutator>ROR6</mutator>
+            <mutator>AOD1</mutator>
+            <mutator>AOD2</mutator>
           </mutators>
         </configuration>
       </plugin>
