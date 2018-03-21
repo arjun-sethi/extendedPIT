@@ -227,49 +227,49 @@ class AORMethodVisitor3 extends AbstractInsnMutator {
   private static final Map<Integer, ZeroOperandMutation> MUTATIONS = new HashMap<>();
 
   static {
-    MUTATIONS.put(Opcodes.IADD, new InsnSubstitution(Opcodes.IMOD,
+    MUTATIONS.put(Opcodes.IADD, new InsnSubstitution(Opcodes.IREM,
         "Replaced integer addition with modulus"));
-    MUTATIONS.put(Opcodes.ISUB, new InsnSubstitution(Opcodes.IMOD,
+    MUTATIONS.put(Opcodes.ISUB, new InsnSubstitution(Opcodes.IREM,
         "Replaced integer subtraction with modulus"));
-    MUTATIONS.put(Opcodes.IMUL, new InsnSubstitution(Opcodes.IMOD,
+    MUTATIONS.put(Opcodes.IMUL, new InsnSubstitution(Opcodes.IREM,
         "Replaced integer multiplication with modulus"));
-    MUTATIONS.put(Opcodes.IDIV, new InsnSubstitution(Opcodes.IMOD,
+    MUTATIONS.put(Opcodes.IDIV, new InsnSubstitution(Opcodes.IREM,
         "Replaced integer division with modulus"));
     MUTATIONS.put(Opcodes.IREM, new InsnSubstitution(Opcodes.IDIV,
         "Replaced integer modulus with division"));
 
     // longs
-    MUTATIONS.put(Opcodes.LADD, new InsnSubstitution(Opcodes.LMOD,
+    MUTATIONS.put(Opcodes.LADD, new InsnSubstitution(Opcodes.LREM,
         "Replaced long addition with modulus"));
-    MUTATIONS.put(Opcodes.LSUB, new InsnSubstitution(Opcodes.LMOD,
+    MUTATIONS.put(Opcodes.LSUB, new InsnSubstitution(Opcodes.LREM,
         "Replaced long subtraction with modulus"));
-    MUTATIONS.put(Opcodes.LMUL, new InsnSubstitution(Opcodes.LMOD,
+    MUTATIONS.put(Opcodes.LMUL, new InsnSubstitution(Opcodes.LREM,
         "Replaced long multiplication with modulus"));
-    MUTATIONS.put(Opcodes.LDIV, new InsnSubstitution(Opcodes.LMOD,
+    MUTATIONS.put(Opcodes.LDIV, new InsnSubstitution(Opcodes.LREM,
         "Replaced long division with modulus"));
     MUTATIONS.put(Opcodes.LREM, new InsnSubstitution(Opcodes.LDIV,
         "Replaced long modulus with division"));
 
     // floats
-    MUTATIONS.put(Opcodes.FADD, new InsnSubstitution(Opcodes.FMOD,
+    MUTATIONS.put(Opcodes.FADD, new InsnSubstitution(Opcodes.FREM,
         "Replaced float addition with modulus"));
-    MUTATIONS.put(Opcodes.FSUB, new InsnSubstitution(Opcodes.FMOD,
+    MUTATIONS.put(Opcodes.FSUB, new InsnSubstitution(Opcodes.FREM,
         "Replaced float subtraction with modulus"));
-    MUTATIONS.put(Opcodes.FMUL, new InsnSubstitution(Opcodes.FMOD,
+    MUTATIONS.put(Opcodes.FMUL, new InsnSubstitution(Opcodes.FREM,
         "Replaced float multiplication with modulus"));
-    MUTATIONS.put(Opcodes.FDIV, new InsnSubstitution(Opcodes.FMOD,
+    MUTATIONS.put(Opcodes.FDIV, new InsnSubstitution(Opcodes.FREM,
         "Replaced float division with modulus"));
     MUTATIONS.put(Opcodes.FREM, new InsnSubstitution(Opcodes.FDIV,
         "Replaced float modulus with division"));
 
     // doubles
-    MUTATIONS.put(Opcodes.DADD, new InsnSubstitution(Opcodes.DMOD,
+    MUTATIONS.put(Opcodes.DADD, new InsnSubstitution(Opcodes.DREM,
         "Replaced double addition with modulus"));
-    MUTATIONS.put(Opcodes.DSUB, new InsnSubstitution(Opcodes.DMOD,
+    MUTATIONS.put(Opcodes.DSUB, new InsnSubstitution(Opcodes.DREM,
         "Replaced double subtraction with modulus"));
-    MUTATIONS.put(Opcodes.DMUL, new InsnSubstitution(Opcodes.DMOD,
+    MUTATIONS.put(Opcodes.DMUL, new InsnSubstitution(Opcodes.DREM,
         "Replaced double multiplication with modulus"));
-    MUTATIONS.put(Opcodes.DDIV, new InsnSubstitution(Opcodes.DMOD,
+    MUTATIONS.put(Opcodes.DDIV, new InsnSubstitution(Opcodes.DREM,
         "Replaced double division with modulus"));
     MUTATIONS.put(Opcodes.DREM, new InsnSubstitution(Opcodes.DDIV,
         "Replaced double modulus with division"));
