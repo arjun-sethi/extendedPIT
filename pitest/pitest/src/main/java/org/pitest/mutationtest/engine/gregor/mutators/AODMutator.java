@@ -175,7 +175,7 @@ class AODMethodVisitor2 extends MethodVisitor {
     {
       final MutationIdentifier newId = this.context.registerMutation(this.factory, "Replaced LONG A " + symbol(opcode) + " B with B");
       if (this.context.shouldMutate(newId)) {
-        this.mv.visitInsn(Opcodes.DUP2_X1);
+        this.mv.visitInsn(Opcodes.DUP2_X2);
         this.mv.visitInsn(Opcodes.POP2);
         this.mv.visitInsn(Opcodes.POP2);
       } else {
@@ -185,7 +185,7 @@ class AODMethodVisitor2 extends MethodVisitor {
     {
       final MutationIdentifier newId = this.context.registerMutation(this.factory, "Replaced DOUBLE A " + symbol(opcode) + " B with B");
       if (this.context.shouldMutate(newId)) {
-        this.mv.visitInsn(Opcodes.DUP2_X1);
+        this.mv.visitInsn(Opcodes.DUP2_X2);
         this.mv.visitInsn(Opcodes.POP2);
         this.mv.visitInsn(Opcodes.POP2);
       } else {
