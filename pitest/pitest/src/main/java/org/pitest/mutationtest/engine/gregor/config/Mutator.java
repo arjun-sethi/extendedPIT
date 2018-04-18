@@ -58,12 +58,42 @@ import org.pitest.mutationtest.engine.gregor.mutators.experimental.SwitchMutator
 import org.pitest.mutationtest.engine.gregor.mutators.AORMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.RORMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.AODMutator;
+import org.pitest.mutationtest.engine.gregor.mutators.InvertMutator;
+
 
 public final class Mutator {
 
   private static final Map<String, Iterable<MethodMutatorFactory>> MUTATORS = new LinkedHashMap<>();
 
   static {
+
+    //extentsion mutators
+    /**
+     * Mutators that mutate AOR of +,-,/,*. %
+     *
+     */
+    add("AOR1", AORMutator.AORMutator1.AOR_MUTATOR); //MUL , MUL , ADD , ADD , ADD
+    add("AOR2", AORMutator.AORMutator2.AOR_MUTATOR); //DIV , DIV , SUB , SUB , SUB
+    add("AOR3", AORMutator.AORMutator3.AOR_MUTATOR); //MOD , MOD , MOD , MOD , DIV
+
+    /**
+     * Mutation for AOD (a+b->a and a+b ->b)
+     */
+    add("AOD1", AODMutator.AODMutator1.AOD_MUTATOR);  //a+b -> a
+    add("AOD2", AODMutator.AODMutator2.AOD_MUTATOR);  //a+b -> b
+
+    /**
+     * Mutators for ROR for < , <= , > , >= , != , ==
+     */
+    add("ROR1",RORMutator.RORMutator1.ROR_MUTATOR); // == to > , != to > , < to > , <= to != , >= to > , > to !=
+    add("ROR2",RORMutator.RORMutator2.ROR_MUTATOR); // == to < , != to < , < to != , <= to < , >= to != , > to <
+    add("ROR3",RORMutator.RORMutator3.ROR_MUTATOR); // == to >= , != to >= , < to == , <= to >= , >= to == , > to >=
+    add("ROR4",RORMutator.RORMutator4.ROR_MUTATOR); // == to <= , != to <= , < to <= , <= to == , >= to <= , > to ==
+
+    /**
+     * Mutator to do ABS and -ABS. i.e. a->-a and -a->a for int, float, double, and long
+     */
+    add("Invert", InvertMutator.InvertMutator1.INVERT_MUTATOR);  //a->-a or -a->a
 
     /**
      * Default mutator that inverts the negation of integer and floating point
@@ -88,14 +118,6 @@ public final class Mutator {
     add("MATH", MathMutator.MATH_MUTATOR);
 
     /**
-     * Mutators that mutate AOR of +,-,/,*. %
-     *
-     */
-    add("AOR1", AORMutator.AORMutator1.AOR_MUTATOR); //MUL , MUL , ADD , ADD , ADD
-    add("AOR2", AORMutator.AORMutator2.AOR_MUTATOR); //DIV , DIV , SUB , SUB , SUB
-    add("AOR3", AORMutator.AORMutator3.AOR_MUTATOR); //MOD , MOD , MOD , MOD , DIV
-
-    /**
      * Default mutator that removes method calls to void methods.
      *
      */
@@ -105,14 +127,6 @@ public final class Mutator {
      * Default mutator that negates conditionals.
      */
     add("NEGATE_CONDITIONALS",NegateConditionalsMutator.NEGATE_CONDITIONALS_MUTATOR);
-
-    /**
-     * MutatorS for ROR for < , <= , > , >= , != , ==
-     */
-    add("ROR1",RORMutator.RORMutator1.ROR_MUTATOR); // == to > , != to > , < to > , <= to != , >= to > , > to !=
-    add("ROR2",RORMutator.RORMutator2.ROR_MUTATOR); // == to < , != to < , < to != , <= to < , >= to != , > to <
-    add("ROR3",RORMutator.RORMutator3.ROR_MUTATOR); // == to >= , != to >= , < to == , <= to >= , >= to == , > to >=
-    add("ROR4",RORMutator.RORMutator4.ROR_MUTATOR); // == to <= , != to <= , < to <= , <= to == , >= to <= , > to ==
 
     /**
      * Default mutator that replaces the relational operators with their
@@ -132,13 +146,6 @@ public final class Mutator {
      */
 
     add("REMOVE_INCREMENTS", RemoveIncrementsMutator.REMOVE_INCREMENTS_MUTATOR);
-
-    /**
-     * Mutation for AOD (a+b->a and a+b ->b)
-     */
-
-    add("AOD1", AODMutator.AODMutator1.AOD_MUTATOR);  //a+b -> a
-    add("AOD2", AODMutator.AODMutator2.AOD_MUTATOR);  //a+b -> b
 
     /**
      * Optional mutator that removes method calls to non void methods.
