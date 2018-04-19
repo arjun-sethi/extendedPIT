@@ -11,7 +11,7 @@ import org.pitest.mutationtest.engine.gregor.MutationContext;
   i.e. when a field is dereferenced, only perform the field dereference if object reference is not null
   */
 public class FieldNullCheckMutator {
-	public enum FieldNullCheck implements MethodMutatorFactory {
+  public enum FieldNullCheck implements MethodMutatorFactory {
 
     FIELD_NULL_CHECK_MUTATOR;
 
@@ -31,6 +31,7 @@ public class FieldNullCheckMutator {
       return name();
     }
   }
+}
 
   class FieldNullCheck1 extends MethodVisitor {
     private final MethodMutatorFactory factory;
@@ -43,34 +44,17 @@ public class FieldNullCheckMutator {
     }
 
     @Override
-    public void visitFieldInsn(final int opcode, final String owner, final String name, final String desc) 
-    {
-      if (opcode == Opcodes.GETFIELD)
-      {
+    public void visitFieldInsn(final int opcode, final String owner, final String name, final String desc) {
+      if (opcode == Opcodes.GETFIELD) {
         final MutationIdentifier newId = this.context.registerMutation(this.factory, "Placed null check before field dereference");
-        if (this.context.shouldMutate(newId)) 
-        {
-  	      	this.mv.visitInsn(Opcodes.DUP)	//duplicate objectref on stack
-  	      	if((this.mv.visitInsn(Opcodes.POP))!=null) //pop objectref and check if it is null
-  	      	{
-  	        	this.mv.visitInsn(opcode);	//if objectref is not null then proceed with getfield operation
-  	      	} 
-        		else 
-        		{
-        			this.mv.visitInsn(Opcodes.POP);	//else pop 2nd copy of objectref from stack to ignore the operation
-        		}
-      	} 
-        else 
-        {
-          super.visitFieldInsn(opcode, owner, name, desc);
-        }
-    	}
-      else
-      {
+        if (this.context.shouldMutate(newId)) {
+        this.mv.visitInsn(Opcodes.DUP); //duplicate objectref on stack
+        this.mv.visitVarInsn(Opcodes.IFNONNULL,opcode); //if objectref != null, then do the opcode. Else, move on to the next instruction 
+      } else {
+        super.visitFieldInsn(opcode, owner, name, desc);
+          }
+        } else {
         super.visitFieldInsn(opcode, owner, name, desc);
       }
-
-
-  	}
+    }
   }
-}

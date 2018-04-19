@@ -60,7 +60,7 @@ import org.pitest.mutationtest.engine.gregor.mutators.RORMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.AODMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.InvertMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.FieldNullCheckMutator;
-
+import org.pitest.mutationtest.engine.gregor.mutators.RandVarReplMutator;
 
 
 public final class Mutator {

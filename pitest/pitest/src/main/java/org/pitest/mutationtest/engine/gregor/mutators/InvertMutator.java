@@ -16,7 +16,7 @@ public class InvertMutator {
     @Override
     public MethodVisitor create(final MutationContext context,
         final MethodInfo methodInfo, final MethodVisitor methodVisitor) {
-      return new InvertMethodVisitor(this, context, methodVisitor);
+      return new InvertMethodVisitor1 (this, context, methodVisitor);
     }
 
     @Override
@@ -29,18 +29,21 @@ public class InvertMutator {
       return name();
     }
   }
+}
 
-  class InvertMethodVisitor extends MethodVisitor {
+  class InvertMethodVisitor1 extends MethodVisitor {
 
     private final MethodMutatorFactory factory;
     private final MutationContext context;
 
-    InvertMethodVisitor(final MethodMutatorFactory factory,
+    InvertMethodVisitor1 (final MethodMutatorFactory factory,
                             final MutationContext context, final MethodVisitor delegateMethodVisitor) {
         super(Opcodes.ASM6, delegateMethodVisitor);
         this.factory = factory;
         this.context = context;
     }
+
+  @Override
   public void visitVarInsn(final int opcode, final int var) {
       if (opcode == Opcodes.ILOAD) {
         final MutationIdentifier newId = this.context.registerMutation(this.factory, "Inverted sign of Integer Variable ");
@@ -55,8 +58,7 @@ public class InvertMutator {
         } else {
             super.visitVarInsn(opcode, var);
         }
-      }
-      else if (opcode == Opcodes.FLOAD) {
+      } else if (opcode == Opcodes.FLOAD) {
         final MutationIdentifier newId = this.context.registerMutation(this.factory, "Inverted sign of Float Variable ");
 
         if (this.context.shouldMutate(newId)) {
@@ -69,8 +71,7 @@ public class InvertMutator {
         } else {
             super.visitVarInsn(opcode, var);
         }
-      }
-      else if (opcode == Opcodes.LLOAD) {
+      } else if (opcode == Opcodes.LLOAD) {
         final MutationIdentifier newId = this.context.registerMutation(this.factory, "Inverted sign of Long Variable ");
 
         if (this.context.shouldMutate(newId)) {
@@ -83,8 +84,7 @@ public class InvertMutator {
         } else {
             super.visitVarInsn(opcode, var);
         }
-      }
-      else if (opcode == Opcodes.DLOAD) {
+      } else if (opcode == Opcodes.DLOAD) {
         final MutationIdentifier newId = this.context.registerMutation(this.factory, "Inverted sign of Double Variable ");
 
         if (this.context.shouldMutate(newId)) {
@@ -102,4 +102,3 @@ public class InvertMutator {
         }
     }
   }
-}
