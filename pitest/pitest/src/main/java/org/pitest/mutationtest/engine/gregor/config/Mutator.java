@@ -100,7 +100,12 @@ public final class Mutator {
     /**
      * Mutator to only perform field dereference if objetref is not null
      */
-    add("FieldNullCheck", FieldNullCheck.FieldNullCheck1.FIELD_NULL_CHECK_MUTATOR);  //if (objectref!=null) proceed, else skip
+    add("FieldNullCheck", FieldNullCheckMutator.FieldNullCheck.FIELD_NULL_CHECK_MUTATOR);  //if (objectref!=null) proceed, else skip
+    
+    /**
+     * replace local variable by another local variable at random
+     */
+    add("RandVarRepl", RandVarReplMutator.RandomVarReplacement.RAND_VAR_MUTATOR);  //if (objectref!=null) proceed, else skip
 
     /**
      * Default mutator that inverts the negation of integer and floating point

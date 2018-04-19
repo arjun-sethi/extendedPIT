@@ -33,39 +33,44 @@ public class FieldNullCheckMutator {
   }
 
   class FieldNullCheck1 extends MethodVisitor {
-  private final MethodMutatorFactory factory;
-  private final MutationContext      context;
+    private final MethodMutatorFactory factory;
+    private final MutationContext      context;
 
-  FieldNullCheck1(final MethodMutatorFactory factory, final MutationContext context, final MethodVisitor delegateMethodVisitor) {
-    super(Opcodes.ASM6, delegateMethodVisitor);
-    this.factory = factory;
-    this.context = context;
-  }
-
-  @Override
-  public void visitFieldInsn(final int opcode, final String owner, final String name, final String desc) 
-  {
-    if (opcode == Opcodes.GETFIELD)
-    {
-      final MutationIdentifier newId = this.context.registerMutation(this.factory, "Placed null check before field dereference");
-      if (this.context.shouldMutate(newId)) 
-      	{
-	      	this.mv.visitInsn(Opcodes.DUP)	//duplicate objectref on stack
-	      	if((this.mv.visitInsn(Opcodes.POP))!=null) //pop objectref and check if it is null
-	      	{
-	        	this.mv.visitInsn(opcode);	//if objectref is not null then proceed with getfield operation
-	      	} 
-      		else 
-      		{
-      			this.mv.visitInsn(Opcodes.POP);	//else pop 2nd copy of objectref from stack to ignore the operation
-      		}
-    	} 
-    else 
-    {
-      super.visitFieldInsn(opcode, owner, name, desc);
+    FieldNullCheck1(final MethodMutatorFactory factory, final MutationContext context, final MethodVisitor delegateMethodVisitor) {
+      super(Opcodes.ASM6, delegateMethodVisitor);
+      this.factory = factory;
+      this.context = context;
     }
+
+    @Override
+    public void visitFieldInsn(final int opcode, final String owner, final String name, final String desc) 
+    {
+      if (opcode == Opcodes.GETFIELD)
+      {
+        final MutationIdentifier newId = this.context.registerMutation(this.factory, "Placed null check before field dereference");
+        if (this.context.shouldMutate(newId)) 
+        {
+  	      	this.mv.visitInsn(Opcodes.DUP)	//duplicate objectref on stack
+  	      	if((this.mv.visitInsn(Opcodes.POP))!=null) //pop objectref and check if it is null
+  	      	{
+  	        	this.mv.visitInsn(opcode);	//if objectref is not null then proceed with getfield operation
+  	      	} 
+        		else 
+        		{
+        			this.mv.visitInsn(Opcodes.POP);	//else pop 2nd copy of objectref from stack to ignore the operation
+        		}
+      	} 
+        else 
+        {
+          super.visitFieldInsn(opcode, owner, name, desc);
+        }
+    	}
+      else
+      {
+        super.visitFieldInsn(opcode, owner, name, desc);
+      }
+
+
   	}
-
-
-	}
+  }
 }

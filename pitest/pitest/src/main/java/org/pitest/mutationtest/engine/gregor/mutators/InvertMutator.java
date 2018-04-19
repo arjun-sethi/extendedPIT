@@ -46,7 +46,7 @@ public class InvertMutator {
         final MutationIdentifier newId = this.context.registerMutation(this.factory, "Inverted sign of Integer Variable ");
 
         if (this.context.shouldMutate(newId)) {
-            this.mv.visitVarInsn(opcode, var); //load integer value onto stack
+            this.mv.visitVarInsn(opcode, var); //load integer value from variable index var onto stack
             this.mv.visitInsn(Opcodes.ICONST_M1); //push -1 on stack
             this.mv.visitInsn(Opcodes.IMUL);  //multiple two integers and push result
             this.mv.visitVarInsn(Opcodes.ISTORE, var);  //place integer from stack into local var
