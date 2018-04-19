@@ -89,7 +89,7 @@ class AODMethodVisitor1 extends MethodVisitor {
       if (this.context.shouldMutate(newId)) {
         this.mv.visitInsn(Opcodes.POP);
       } else {
-        this.mv.visitInsn(opcode);
+        super.visitInsn(opcode);
       }
     } else if (opcode == Opcodes.FADD || opcode == Opcodes.FSUB || opcode == Opcodes.FDIV || opcode == Opcodes.FMUL || opcode == Opcodes.FREM)
     {
@@ -97,7 +97,7 @@ class AODMethodVisitor1 extends MethodVisitor {
       if (this.context.shouldMutate(newId)) {
         this.mv.visitInsn(Opcodes.POP);
       } else {
-        this.mv.visitInsn(opcode);
+        super.visitInsn(opcode);
       }
     } else if (opcode == Opcodes.LADD || opcode == Opcodes.LSUB || opcode == Opcodes.LDIV || opcode == Opcodes.LMUL || opcode == Opcodes.LREM)
     {
@@ -105,7 +105,7 @@ class AODMethodVisitor1 extends MethodVisitor {
       if (this.context.shouldMutate(newId)) {
         this.mv.visitInsn(Opcodes.POP2);
       } else {
-        this.mv.visitInsn(opcode);
+        super.visitInsn(opcode);
       }
     }  else if (opcode == Opcodes.DADD || opcode == Opcodes.DSUB || opcode == Opcodes.DDIV || opcode == Opcodes.DMUL || opcode == Opcodes.DREM)
     {
@@ -113,10 +113,10 @@ class AODMethodVisitor1 extends MethodVisitor {
       if (this.context.shouldMutate(newId)) {
         this.mv.visitInsn(Opcodes.POP2);
       } else {
-        this.mv.visitInsn(opcode);
+        super.visitInsn(opcode);
       }
     } else {
-      this.mv.visitInsn(opcode);
+      super.visitInsn(opcode);
     }
   }
 
@@ -160,7 +160,7 @@ class AODMethodVisitor2 extends MethodVisitor {
         this.mv.visitInsn(Opcodes.DUP_X1);
         this.mv.visitInsn(Opcodes.POP2);
       } else {
-        this.mv.visitInsn(opcode);
+        super.mv.visitInsn(opcode);
       }
     } else if (opcode == Opcodes.FADD || opcode == Opcodes.FSUB || opcode == Opcodes.FDIV || opcode == Opcodes.FMUL || opcode == Opcodes.FREM)
     {
@@ -169,7 +169,7 @@ class AODMethodVisitor2 extends MethodVisitor {
         this.mv.visitInsn(Opcodes.DUP_X1);
         this.mv.visitInsn(Opcodes.POP2);
       } else {
-        this.mv.visitInsn(opcode);
+        super.mv.visitInsn(opcode);
       }
     } else if (opcode == Opcodes.LADD || opcode == Opcodes.LSUB || opcode == Opcodes.LDIV || opcode == Opcodes.LMUL || opcode == Opcodes.LREM)
     {
@@ -179,7 +179,7 @@ class AODMethodVisitor2 extends MethodVisitor {
         this.mv.visitInsn(Opcodes.POP2);
         this.mv.visitInsn(Opcodes.POP2);
       } else {
-        this.mv.visitInsn(opcode);
+        super.mv.visitInsn(opcode);
       }
     }  else if (opcode == Opcodes.DADD || opcode == Opcodes.DSUB || opcode == Opcodes.DDIV || opcode == Opcodes.DMUL || opcode == Opcodes.DREM)
     {
@@ -189,10 +189,10 @@ class AODMethodVisitor2 extends MethodVisitor {
         this.mv.visitInsn(Opcodes.POP2);
         this.mv.visitInsn(Opcodes.POP2);
       } else {
-        this.mv.visitInsn(opcode);
+        super.mv.visitInsn(opcode);
       }
     } else {
-      this.mv.visitInsn(opcode);
+      super.mv.visitInsn(opcode);
     }
   }
 

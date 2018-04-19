@@ -59,6 +59,8 @@ import org.pitest.mutationtest.engine.gregor.mutators.AORMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.RORMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.AODMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.InvertMutator;
+import org.pitest.mutationtest.engine.gregor.mutators.FieldNullCheckMutator;
+
 
 
 public final class Mutator {
@@ -94,6 +96,11 @@ public final class Mutator {
      * Mutator to do ABS and -ABS. i.e. a->-a and -a->a for int, float, double, and long
      */
     add("Invert", InvertMutator.InvertMutator1.INVERT_MUTATOR);  //a->-a or -a->a
+
+    /**
+     * Mutator to only perform field dereference if objetref is not null
+     */
+    add("FieldNullCheck", FieldNullCheck.FieldNullCheck1.FIELD_NULL_CHECK_MUTATOR);  //if (objectref!=null) proceed, else skip
 
     /**
      * Default mutator that inverts the negation of integer and floating point
