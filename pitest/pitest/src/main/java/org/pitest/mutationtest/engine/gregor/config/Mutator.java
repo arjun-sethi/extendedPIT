@@ -60,7 +60,10 @@ import org.pitest.mutationtest.engine.gregor.mutators.RORMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.AODMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.InvertMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.FieldNullCheckMutator;
-import org.pitest.mutationtest.engine.gregor.mutators.RandVarReplMutator;
+//import org.pitest.mutationtest.engine.gregor.mutators.RandVarReplMutator;
+import org.pitest.mutationtest.engine.gregor.mutators.UOIMutator;
+import org.pitest.mutationtest.engine.gregor.mutators.SVRMutator;
+
 
 
 public final class Mutator {
@@ -105,7 +108,13 @@ public final class Mutator {
     /**
      * replace local variable by another local variable at random
      */
-    add("RandVarRepl", RandVarReplMutator.RandomVarReplacement.RAND_VAR_MUTATOR);  //if (objectref!=null) proceed, else skip
+    //add("RandVarRepl", RandVarReplMutator.RandomVarReplacement.RAND_VAR_MUTATOR);
+
+    add("UOIADD1", UOIMutator.AddIncrementsMutator.UOI_MUTATOR);
+    add("UOISUBTRACT1", UOIMutator.AddDecrementsMutator.UOI_MUTATOR);
+    add("SVR1", SVRMutator.SVRMutator1.SVR_MUTATOR);
+    add("SVR2", SVRMutator.SVRMutator2.SVR_MUTATOR);
+
 
     /**
      * Default mutator that inverts the negation of integer and floating point

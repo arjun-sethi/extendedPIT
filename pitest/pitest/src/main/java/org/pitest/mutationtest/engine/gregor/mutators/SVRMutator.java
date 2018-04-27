@@ -53,7 +53,7 @@ public class SVRMutator {
     }
   }
 
-  public enum SVRMutator3 implements MethodMutatorFactory {
+ /* public enum SVRMutator3 implements MethodMutatorFactory {
 
     SVR_MUTATOR;
 
@@ -72,7 +72,7 @@ public class SVRMutator {
     public String getName() {
       return name();
     }
-  }
+  }*/
 }
 
 //C=A+B -> C=A+A
@@ -202,7 +202,7 @@ class SVRMethodVisitor2 extends MethodVisitor {
 }
 
 //C=A+B -> C=A+C
-class SVRMethodVisitor3 extends MethodVisitor {
+/*class SVRMethodVisitor3 extends MethodVisitor {
   private final MethodMutatorFactory factory;
   private final MutationContext      context;
 
@@ -262,4 +262,4 @@ class SVRMethodVisitor3 extends MethodVisitor {
     }
   }
 
-}
+}*/

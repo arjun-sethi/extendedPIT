@@ -1,0 +1,37 @@
+Other stuff you can add:
+	-and, or,xor,ushr,shr,shl
+	-++a vs a++. for one of them, you need to do super.load twice so you can put the value of 2.0
+	-cr mutator (a-1,a+1,1,0,and one more...)
+	-
+
+M1:
+	a -> DUP -> a a ->IFNONNULL
+		isnull -> pop2 and pop for putfield
+		isnotnull dup_x2, super for putfield
+
+		isnull xconst_0 for getfield
+		isnotnll super
+
+M2: classvisitor
+	override 
+	public methodvisitor visitmethod()
+	{
+	classmethods.owner=name
+	classmethods.methodinfo.add()
+	}
+
+
+
+
+
+
+
+	________________
+
+if you insert a mutation, and it provides more green, it means it fixed a bug that was in the program.
+
+
+if you successfully do m1, you should be able to fix a bug in apache commons.
+
+remember not both mutations happen at the same time. Only one happens. EX: x+y will be (++x) + y then x + (++y)
+

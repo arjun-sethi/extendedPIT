@@ -22,6 +22,11 @@ First copy and paste below code into pom.xml file of the project in the correct 
         <version>1.4.0-SNAPSHOT</version>
         <configuration>
           <mutators>
+            <mutator>CONDITIONALS_BOUNDARY</mutator>
+            <mutator>INCREMENTS</mutator>
+            <mutator>VOID_METHOD_CALLS</mutator>
+            <mutator>RETURN_VALS</mutator>
+            <mutator>INVERT_NEGS</mutator>
             <mutator>MATH</mutator>
             <mutator>AOR1</mutator>
             <mutator>AOR2</mutator>
@@ -35,12 +40,16 @@ First copy and paste below code into pom.xml file of the project in the correct 
             <mutator>AOD2</mutator>
             <mutator>Invert</mutator>
             <mutator>FieldNullCheck</mutator>
-            <mutator>RandVarRepl</mutator>
+            <mutator>UOIADD1</mutator>
+            <mutator>UOISUBTRACT1</mutator>
+            <mutator>SVR1</mutator>
+            <mutator>SVR2</mutator>
           </mutators>
         </configuration>
       </plugin>
      </plugins>
     </build>
+
 
 Additionally the following lines can be added in the configuration section to run only certain test cases.
 
