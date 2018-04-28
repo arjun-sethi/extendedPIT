@@ -2,6 +2,7 @@ package org.pitest.mutationtest.engine.gregor.mutators;
 
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.pitest.classinfo.ClassByteArraySource;
 import org.pitest.mutationtest.engine.MutationIdentifier;
 import org.pitest.mutationtest.engine.gregor.MethodInfo;
 import org.pitest.mutationtest.engine.gregor.MethodMutatorFactory;
@@ -19,7 +20,7 @@ public class FieldNullCheckMutator {
 
     @Override
     public MethodVisitor create(final MutationContext context,
-        final MethodInfo methodInfo, final MethodVisitor methodVisitor) {
+        final MethodInfo methodInfo, final MethodVisitor methodVisitor, ClassByteArraySource byteSource) {
       return new FieldNullCheck1(this, context, methodVisitor);
     }
 
@@ -48,6 +49,21 @@ public class FieldNullCheckMutator {
       this.context = context;
     }
 
+    public void pushValues(String param) {
+        if (param.equalsIgnoreCase("Z") || param.equalsIgnoreCase("C") || param.equalsIgnoreCase("B")
+                || param.equalsIgnoreCase("S") || param.equalsIgnoreCase("I")) {
+            super.visitInsn(Opcodes.ICONST_0);
+        } else if (param.equalsIgnoreCase("D")) {
+            super.visitInsn(Opcodes.DCONST_0);
+        } else if (param.equalsIgnoreCase("F")) {
+            super.visitInsn(Opcodes.FCONST_0);
+        } else if (param.equalsIgnoreCase("J")) {
+            super.visitInsn(Opcodes.LCONST_0);
+        } else {
+            // objects or array types
+            super.visitInsn(Opcodes.ACONST_NULL);
+        }
+    }
 
     @Override
     public void visitFieldInsn(final int opcode, final String owner, final String name, final String desc) {
@@ -60,17 +76,7 @@ public class FieldNullCheckMutator {
             this.mv.visitInsn(Opcodes.POP); //duplicate objectref on stack
                         //super.visitInsn(Opcodes.ACONST_NULL);
 
-        if (desc.equalsIgnoreCase("I")) {
-            super.visitInsn(Opcodes.ICONST_0);
-        } else if (desc.equalsIgnoreCase("D")) {
-            super.visitInsn(Opcodes.DCONST_0);
-        } else if (desc.equalsIgnoreCase("F")) {
-            super.visitInsn(Opcodes.FCONST_0);
-        } else if (desc.equalsIgnoreCase("L")) {
-            super.visitInsn(Opcodes.LCONST_0);
-        } else {
-            super.visitInsn(Opcodes.ACONST_NULL);
-        }
+       pushValues(desc);
             this.mv.visitJumpInsn(Opcodes.GOTO,exit); //if objectref == null, jump to label
           this.mv.visitLabel(ifnonull);
             super.visitFieldInsn(opcode, owner, name, desc);

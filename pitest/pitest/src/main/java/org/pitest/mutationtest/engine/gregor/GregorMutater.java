@@ -81,7 +81,7 @@ public class GregorMutater implements Mutater {
     final ClassReader first = new ClassReader(classToMutate);
     final NullVisitor nv = new NullVisitor();
     final MutatingClassVisitor mca = new MutatingClassVisitor(nv, context,
-        filterMethods(), this.mutators);
+        filterMethods(), this.mutators, null);
 
     first.accept(mca, ClassReader.EXPAND_FRAMES);
 
@@ -102,7 +102,7 @@ public class GregorMutater implements Mutater {
         this.computeCache, FrameOptions.pickFlags(bytes.get()));
     final MutatingClassVisitor mca = new MutatingClassVisitor(w, context,
         filterMethods(), FCollection.filter(this.mutators,
-            isMutatorFor(id)));
+            isMutatorFor(id)), null);
     reader.accept(mca, ClassReader.EXPAND_FRAMES);
 
     final List<MutationDetails> details = context.getMutationDetails(context

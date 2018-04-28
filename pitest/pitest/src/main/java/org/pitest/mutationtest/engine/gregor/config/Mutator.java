@@ -60,9 +60,11 @@ import org.pitest.mutationtest.engine.gregor.mutators.RORMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.AODMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.InvertMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.FieldNullCheckMutator;
-//import org.pitest.mutationtest.engine.gregor.mutators.RandVarReplMutator;
+import org.pitest.mutationtest.engine.gregor.mutators.RandVarReplMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.UOIMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.SVRMutator;
+//import org.pitest.mutationtest.engine.gregor.mutators.CallAnotherOverloadingMethod;
+
 
 
 
@@ -71,6 +73,10 @@ public final class Mutator {
   private static final Map<String, Iterable<MethodMutatorFactory>> MUTATORS = new LinkedHashMap<>();
 
   static {
+
+    //m2 addition
+    //add("M2", CallAnotherOverloadingMethod.CallAnotherOverloadingMethod1.CALL_ANOTHER_OVERLOADING_METHOD);
+
 
     //extentsion mutators
     /**
@@ -108,7 +114,7 @@ public final class Mutator {
     /**
      * replace local variable by another local variable at random
      */
-    //add("RandVarRepl", RandVarReplMutator.RandomVarReplacement.RAND_VAR_MUTATOR);
+    add("M4", RandVarReplMutator.RandomVarReplacement.RAND_VAR_MUTATOR);
 
     add("UOIADD1", UOIMutator.AddIncrementsMutator.UOI_MUTATOR);
     add("UOISUBTRACT1", UOIMutator.AddDecrementsMutator.UOI_MUTATOR);

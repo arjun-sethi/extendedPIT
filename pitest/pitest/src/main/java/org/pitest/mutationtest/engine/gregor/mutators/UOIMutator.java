@@ -2,6 +2,7 @@ package org.pitest.mutationtest.engine.gregor.mutators;
 
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.pitest.classinfo.ClassByteArraySource;
 import org.pitest.mutationtest.engine.MutationIdentifier;
 import org.pitest.mutationtest.engine.gregor.MethodInfo;
 import org.pitest.mutationtest.engine.gregor.MethodMutatorFactory;
@@ -14,7 +15,7 @@ public class UOIMutator {
         
         @Override
         public MethodVisitor create(final MutationContext context,
-            final MethodInfo methodInfo, final MethodVisitor methodVisitor) {
+            final MethodInfo methodInfo, final MethodVisitor methodVisitor, ClassByteArraySource byteSource) {
           return new AddIncrementsMutator1(this, context, methodVisitor);
         }
         
@@ -35,7 +36,7 @@ public class UOIMutator {
 
         @Override
         public MethodVisitor create(final MutationContext context,
-            final MethodInfo methodInfo, final MethodVisitor methodVisitor) {
+            final MethodInfo methodInfo, final MethodVisitor methodVisitor, ClassByteArraySource byteSource) {
           return new AddDecrementsMutator1(this, context, methodVisitor);
         }
 
@@ -151,8 +152,8 @@ class AddDecrementsMutator1 extends MethodVisitor {
             this.factory, "Added double decrement");
         if (this.context.shouldMutate(newId)) {
             this.mv.visitVarInsn(opcode, var);
-            this.mv.visitLdcInsn(new Double("-1.0"));
-            this.mv.visitInsn(Opcodes.DADD);
+            this.mv.visitInsn(Opcodes.DCONST_1);  //place doulble 1.0 on stack
+            this.mv.visitInsn(Opcodes.DSUB);
             this.mv.visitVarInsn(Opcodes.DSTORE, var);
             super.visitVarInsn(opcode, var);
         } else {
@@ -163,8 +164,8 @@ class AddDecrementsMutator1 extends MethodVisitor {
             this.factory, "Added float decrement");
         if (this.context.shouldMutate(newId)) {
             this.mv.visitVarInsn(opcode, var);
-            this.mv.visitLdcInsn(new Float("-1.0"));
-            this.mv.visitInsn(Opcodes.FADD);
+          this.mv.visitInsn(Opcodes.FCONST_1);
+          this.mv.visitInsn(Opcodes.FSUB);
             this.mv.visitVarInsn(Opcodes.FSTORE, var);
             super.visitVarInsn(opcode, var);
         } else {
@@ -175,8 +176,8 @@ class AddDecrementsMutator1 extends MethodVisitor {
             this.factory, "Added long decrement");
         if (this.context.shouldMutate(newId)) {
             this.mv.visitVarInsn(opcode, var);
-            this.mv.visitLdcInsn(new Long("-1.0"));
-            this.mv.visitInsn(Opcodes.LADD);
+          this.mv.visitInsn(Opcodes.LCONST_1);
+          this.mv.visitInsn(Opcodes.LSUB);
             this.mv.visitVarInsn(Opcodes.LSTORE, var);
             super.visitVarInsn(opcode, var);
         } else {

@@ -22,6 +22,7 @@ import java.util.function.Predicate;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.pitest.classinfo.ClassByteArraySource;
 import org.pitest.classinfo.ClassName;
 import org.pitest.mutationtest.engine.Location;
 import org.pitest.mutationtest.engine.MethodName;
@@ -36,7 +37,7 @@ class MutatingClassVisitor extends ClassVisitor {
 
   MutatingClassVisitor(final ClassVisitor delegateClassVisitor,
       final ClassContext context, final Predicate<MethodInfo> filter,
-      final Collection<MethodMutatorFactory> mutators) {
+      final Collection<MethodMutatorFactory> mutators, ClassByteArraySource byteSource) {
     super(Opcodes.ASM6, delegateClassVisitor);
     this.context = context;
     this.filter = filter;
@@ -88,7 +89,7 @@ class MutatingClassVisitor extends ClassVisitor {
 
     MethodVisitor next = methodVisitor;
     for (final MethodMutatorFactory each : this.methodMutators) {
-      next = each.create(methodContext, methodInfo, next);
+      next = each.create(methodContext, methodInfo, next, null);
     }
 
     return new InstructionTrackingMethodVisitor(wrapWithDecorators(

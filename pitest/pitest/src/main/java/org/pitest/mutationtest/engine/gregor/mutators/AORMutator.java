@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.pitest.classinfo.ClassByteArraySource;
 import org.pitest.mutationtest.engine.gregor.AbstractInsnMutator;
 import org.pitest.mutationtest.engine.gregor.InsnSubstitution;
 import org.pitest.mutationtest.engine.gregor.MethodInfo;
@@ -19,7 +20,7 @@ public class AORMutator  {
 
     @Override
     public MethodVisitor create(final MutationContext context,
-        final MethodInfo methodInfo, final MethodVisitor methodVisitor) {
+        final MethodInfo methodInfo, final MethodVisitor methodVisitor, ClassByteArraySource byteSource) {
       return new AORMethodVisitor1(this, methodInfo, context, methodVisitor);
     }
 
@@ -40,7 +41,7 @@ public class AORMutator  {
 
     @Override
     public MethodVisitor create(final MutationContext context,
-        final MethodInfo methodInfo, final MethodVisitor methodVisitor) {
+        final MethodInfo methodInfo, final MethodVisitor methodVisitor, ClassByteArraySource byteSource) {
       return new AORMethodVisitor2(this, methodInfo, context, methodVisitor);
     }
 
@@ -61,7 +62,7 @@ public class AORMutator  {
 
     @Override
     public MethodVisitor create(final MutationContext context,
-        final MethodInfo methodInfo, final MethodVisitor methodVisitor) {
+        final MethodInfo methodInfo, final MethodVisitor methodVisitor, ClassByteArraySource byteSource) {
       return new AORMethodVisitor3(this, methodInfo, context, methodVisitor);
     }
 
@@ -83,7 +84,7 @@ class AORMethodVisitor1 extends AbstractInsnMutator {
   AORMethodVisitor1(final MethodMutatorFactory factory,
       final MethodInfo methodInfo, final MutationContext context,
       final MethodVisitor writer) {
-    super(factory, methodInfo, context, writer);
+    super(factory, methodInfo, context, writer, null);
   }
 
   private static final Map<Integer, ZeroOperandMutation> MUTATIONS = new HashMap<>();
@@ -152,7 +153,7 @@ class AORMethodVisitor2 extends AbstractInsnMutator {
   AORMethodVisitor2(final MethodMutatorFactory factory,
       final MethodInfo methodInfo, final MutationContext context,
       final MethodVisitor writer) {
-    super(factory, methodInfo, context, writer);
+    super(factory, methodInfo, context, writer, null);
   }
 
   private static final Map<Integer, ZeroOperandMutation> MUTATIONS = new HashMap<>();
@@ -171,13 +172,13 @@ class AORMethodVisitor2 extends AbstractInsnMutator {
 
     // longs
 
-    MUTATIONS.put(Opcodes.LADD, new InsnSubstitution(Opcodes.IDIV,
+    MUTATIONS.put(Opcodes.LADD, new InsnSubstitution(Opcodes.LDIV,
         "Replaced integer addition with division"));
-    MUTATIONS.put(Opcodes.LSUB, new InsnSubstitution(Opcodes.IDIV,
+    MUTATIONS.put(Opcodes.LSUB, new InsnSubstitution(Opcodes.LDIV,
         "Replaced integer subtraction with division"));
-    MUTATIONS.put(Opcodes.LMUL, new InsnSubstitution(Opcodes.ISUB,
+    MUTATIONS.put(Opcodes.LMUL, new InsnSubstitution(Opcodes.LSUB,
         "Replaced integer multiplication with subtraction"));
-    MUTATIONS.put(Opcodes.LDIV, new InsnSubstitution(Opcodes.ISUB,
+    MUTATIONS.put(Opcodes.LDIV, new InsnSubstitution(Opcodes.LSUB,
         "Replaced integer division with subtraction"));
     MUTATIONS.put(Opcodes.LREM, new InsnSubstitution(Opcodes.LSUB,
         "Replaced long modulus with subtraction"));
@@ -221,7 +222,7 @@ class AORMethodVisitor3 extends AbstractInsnMutator {
   AORMethodVisitor3(final MethodMutatorFactory factory,
       final MethodInfo methodInfo, final MutationContext context,
       final MethodVisitor writer) {
-    super(factory, methodInfo, context, writer);
+    super(factory, methodInfo, context, writer, null);
   }
 
   private static final Map<Integer, ZeroOperandMutation> MUTATIONS = new HashMap<>();

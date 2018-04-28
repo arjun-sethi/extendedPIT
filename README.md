@@ -5,7 +5,7 @@ Extending the great PIT Mutation Testing Tool, from pittest.org. This project in
 
 Install maven onto your computer, as well as JAVA SDK
 
-Navigate to extendedPIT/pitest/pitest
+Navigate to extendedPIT/pitest
 
 ```
 $ mvn clean install -DskipTests
@@ -62,7 +62,7 @@ Additionally the following lines can be added in the configuration section to ru
 
 To run a test, open a command line interface where your project's pom.xml file is located
 ```
-$ mvn test
+$ mvn clean install -DskipTests
 ```
 ```
 $ mvn org.pitest:pitest-maven:mutationCoverage

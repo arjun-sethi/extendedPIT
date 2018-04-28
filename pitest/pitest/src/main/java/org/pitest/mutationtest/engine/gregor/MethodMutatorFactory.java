@@ -15,6 +15,7 @@
 package org.pitest.mutationtest.engine.gregor;
 
 import org.objectweb.asm.MethodVisitor;
+import org.pitest.classinfo.ClassByteArraySource;
 
 /**
  * A <code>MethodMutatorFactory</code> is a factory creating method mutating
@@ -35,7 +36,7 @@ import org.objectweb.asm.MethodVisitor;
 public interface MethodMutatorFactory {
 
   MethodVisitor create(MutationContext context,
-      MethodInfo methodInfo, MethodVisitor methodVisitor);
+      MethodInfo methodInfo, MethodVisitor methodVisitor, ClassByteArraySource byteSource);
 
   String getGloballyUniqueId();
 
