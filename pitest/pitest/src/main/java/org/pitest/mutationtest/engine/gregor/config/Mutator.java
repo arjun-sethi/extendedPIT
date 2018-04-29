@@ -63,6 +63,7 @@ import org.pitest.mutationtest.engine.gregor.mutators.FieldNullCheckMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.RandVarReplMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.UOIMutator;
 import org.pitest.mutationtest.engine.gregor.mutators.SVRMutator;
+//import org.pitest.mutationtest.engine.gregor.mutators.ReplaceMethodNameMutator;
 //import org.pitest.mutationtest.engine.gregor.mutators.CallAnotherOverloadingMethod;
 
 
@@ -76,6 +77,9 @@ public final class Mutator {
 
     //m2 addition
     //add("M2", CallAnotherOverloadingMethod.CallAnotherOverloadingMethod1.CALL_ANOTHER_OVERLOADING_METHOD);
+
+    //m3 addition
+    //add("M3", ReplaceMethodNameMutator.ReplaceMethodNameMutator1.REPLACE_METHOD_NAME); //MUL , MUL , ADD , ADD , ADD
 
 
     //extentsion mutators
@@ -108,6 +112,7 @@ public final class Mutator {
 
     /**
      * Mutator to only perform field dereference if objetref is not null
+     *M1
      */
     add("FieldNullCheck", FieldNullCheckMutator.FieldNullCheck.FIELD_NULL_CHECK_MUTATOR);  //if (objectref!=null) proceed, else skip
     

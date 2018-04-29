@@ -26,6 +26,8 @@ public abstract class AbstractInsnMutator extends MethodVisitor {
   private final MethodMutatorFactory factory;
   private final MutationContext      context;
   private final MethodInfo           methodInfo;
+    private final ClassByteArraySource      byteSource;
+
 
   public AbstractInsnMutator(final MethodMutatorFactory factory,
       final MethodInfo methodInfo, final MutationContext context,
@@ -34,6 +36,7 @@ public abstract class AbstractInsnMutator extends MethodVisitor {
     this.factory = factory;
     this.methodInfo = methodInfo;
     this.context = context;
+    this.byteSource = byteSource;
   }
 
   protected abstract Map<Integer, ZeroOperandMutation> getMutations();

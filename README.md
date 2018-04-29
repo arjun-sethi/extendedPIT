@@ -5,11 +5,13 @@ Extending the great PIT Mutation Testing Tool, from pittest.org. This project in
 
 Install maven onto your computer, as well as JAVA SDK
 
-Navigate to extendedPIT/pitest
+Navigate to extendedPIT/pitest.
 
 ```
 $ mvn clean install -DskipTests
 ```
+
+Also run this command in every program being tested for. It should be run whereever the pom.xml file is located for the project.
 
 ### To run a test
 First copy and paste below code into pom.xml file of the project in the correct location to include all extensions (or remove lines of which is not needed)
@@ -39,19 +41,36 @@ First copy and paste below code into pom.xml file of the project in the correct 
             <mutator>AOD1</mutator>
             <mutator>AOD2</mutator>
             <mutator>Invert</mutator>
-            <mutator>FieldNullCheck</mutator>
             <mutator>UOIADD1</mutator>
             <mutator>UOISUBTRACT1</mutator>
             <mutator>SVR1</mutator>
             <mutator>SVR2</mutator>
+            <mutator>M1</mutator>
+            <mutator>M4</mutator>
           </mutators>
         </configuration>
       </plugin>
      </plugins>
     </build>
 
+OR IF ALL MUTATORS:
+    
+    <build>
+     <plugins>
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <version>1.4.0-SNAPSHOT</version>
+        <configuration>
+          <mutators>
+            <mutator>ALL</mutator>
+          </mutators>
+        </configuration>
+      </plugin>
+     </plugins>
+    </build
 
-Additionally the following lines can be added in the configuration section to run only certain test cases.
+Additionally the following lines can be added in the configuration section to run only certain test cases. This is an example of testing only on org.jfree.char.annotations package in jfree chart program code.
 
           <targetClasses>
             <param>org.jfree.chart.annotations*</param>

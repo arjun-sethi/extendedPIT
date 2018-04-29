@@ -32,6 +32,7 @@ import org.pitest.mutationtest.engine.gregor.blocks.BlockTrackingMethodDecorator
 class MutatingClassVisitor extends ClassVisitor {
 
   private final Predicate<MethodInfo>    filter;
+  private final ClassByteArraySource      byteSource;
   private final ClassContext              context;
   private final Set<MethodMutatorFactory> methodMutators = new HashSet<>();
 
@@ -41,6 +42,7 @@ class MutatingClassVisitor extends ClassVisitor {
     super(Opcodes.ASM6, delegateClassVisitor);
     this.context = context;
     this.filter = filter;
+    this.byteSource = byteSource;
     this.methodMutators.addAll(mutators);
   }
 
