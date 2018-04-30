@@ -1,3 +1,13 @@
+```
+NOTES TO GRADER/TA:
+For M1 mutator, use the name "FieldNullCheck". Code is in FieldNullCheckMutator.java
+For M4 mutator, use the name "M4". Code is in RandVarReplMutator.java
+
+Following don't fully work, but are greatly implmented. Please see code.
+For M2 mutatator, scanner class is ScanClassAdapter.java, and mutations in CallAnotherOverloadingMethod.java
+For M3 mutatator, scanner class is ScanForMethodName.java, and mutations in ReplaceMethodNameMutator.java
+```
+
 # extendedPIT
 Extending the great PIT Mutation Testing Tool, from pittest.org. This project includes additional mutators for better java test suite testing.
 
@@ -45,7 +55,7 @@ First copy and paste below code into pom.xml file of the project in the correct 
             <mutator>UOISUBTRACT1</mutator>
             <mutator>SVR1</mutator>
             <mutator>SVR2</mutator>
-            <mutator>M1</mutator>
+            <mutator>FieldNullCheck</mutator>
             <mutator>M4</mutator>
           </mutators>
         </configuration>
